@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload and display images and videos</title>
+</head>
+<body>
+<div stytle="padding:20px;">
+<h2>Upload and display images and videos</h2>
+<p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <u1 class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </u1>
+      {% endif %}
+    {% endwith %}
+
+</p>
+<form method="post"  action="/"  enctype="multipart/form-data">
+    <d1>
+        <p>
+            <input type="file" name="files[]" multiple="true" autocomplete="off" required>
+        </p>
+    </d1>
+    <p>
+        <input type="submit" value="Submit">
+    </p>
+</form>
+
+{% if filenames %}
+    {% for filename in filenames %}
+        <div style="padding:20px;float:left;">
+            <img width="500" src="{{ url_for('display_image', filename=filename) }}">
+        </div>
+    {% endfor %}
+{% endif %}
+</div>
+
+</body>
+</html>
